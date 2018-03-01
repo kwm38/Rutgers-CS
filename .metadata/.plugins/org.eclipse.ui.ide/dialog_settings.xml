@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+		<item value="/Users/chrislopresti/Desktop/cs_Assignments/cs213/working"/>
+		<item value="/Users/chrislopresti/Desktop/working"/>
+		<item value="/Users/chrislopresti/Desktop/working?"/>
+		<item value="/Users/chrislopresti/Desktop/ListView"/>
+		<item value="/Users/chrislopresti/Desktop/help"/>
+		<item value="/Users/chrislopresti/Desktop/cs_Assignments/cs213/test"/>
+		<item value="/Users/chrislopresti/Desktop/cs_Assignments/cs213/testing"/>
+		<item value="/Users/chrislopresti/Desktop/cs_Assignments/cs213/StateCalc"/>
+		<item value="/Users/chrislopresti/Desktop/cs_Assignments/cs213/mod"/>
+		<item value="/Users/chrislopresti/Desktop/cs_Assignments/cs213/photos27"/>
+		<item value="/Users/chrislopresti/Desktop/cs_Assignments/cs213/PhotoAlbum27"/>
+		<item value="/Users/chrislopresti/Desktop/cs_Assignments/cs213/chess27"/>
+		<item value="/Users/chrislopresti/Desktop/cs_Assignments/cs213/photo/TextBasedChess"/>
+		<item value="/Users/chrislopresti/Desktop/cs_Assignments/cs213/PhotoAlbum"/>
+		<item value="/Users/chrislopresti/Desktop/cs_Assignments/cs213/album"/>
+		<item value="/Users/chrislopresti/Desktop/cs_Assignments/cs213"/>
+	</list>
+	<section name="ExternalProjectImportWizard">
+		<item value="false" key="WizardProjectsImportPage.STORE_NESTED_PROJECTS"/>
+		<item value="false" key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID"/>
+		<item value="false" key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED"/>
+		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="/Users/chrislopresti/Desktop/Java-Photo-Album-master"/>
+			<item value="/Users/chrislopresti/Desktop/cs_Assignments/cs213/photo"/>
+		</list>
+		<list key="WizardProjectsImportPage.STORE_ARCHIVES">
+			<item value=""/>
+		</list>
+	</section>
+	<section name="NewWizardAction">
+		<item value="org.eclipse.jdt.ui.wizards.JavaProjectWizard" key="NewWizardSelectionPage.STORE_SELECTED_ID"/>
+		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
+		</list>
+	</section>
+</section>

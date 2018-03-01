@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;application.css&apos; to &apos;PhotoAlbum27/src/PhotoAlbum&apos;&#x0A;- Original project: &apos;PhotoAlbum71&apos;&#x0A;- Destination element: &apos;PhotoAlbum27/src/PhotoAlbum&apos;&#x0A;- Original element: &apos;application.css&apos;" description="Copy file" destination="=PhotoAlbum27/src&lt;PhotoAlbum" element1="src/photoalbum/application.css" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1509560627397" units="0" version="1.0"/>
+</session>

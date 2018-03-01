@@ -1,0 +1,51 @@
+package thread1;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+
+
+public class Names{
+	
+	
+ 
+
+	public static void main(String[] args) {
+		
+		Coder c1= new Coder("Chris", "colts neck", 2010, 50890, "PYTHON");
+		Coder c2= new Coder("taylor", "colts neck", 2011, 5, "JAVA");
+		Coder c3= new Coder("ben", "marlboro", 2016, 50678, "PHP");
+		Coder c4= new Coder("matt", "freehold", 1987, 20, "C");
+		Coder c5= new Coder("mike", "new brunswick", 2017, 100000, "JAVA");
+		Coder c6= new Coder("sarah", "new york", 2016, 80324, "PYTHON");
+		
+		List<Coder> Coders = Arrays.asList( c1,c2,c3,c4,c5,c6);
+		
+			
+			//part 3-c-i
+			List<String> map =  Coders.stream().filter(y-> y.getYear() == 2016 ).sorted((o1,o2)->o2.getLoc() - o1.getLoc()).map(Coder::getName).collect(Collectors.toList());
+
+					
+			for(String s: map){	System.out.println(s); }
+					
+			
+			//Map<Coder.Language, Map<String, Map<Integer, List<String>>>>  map2 = Coders.stream().collect(groupingBy(Coder::getLang, groupingBy(Coder::getCity,groupingBy(Coder::getLoc >= 50000)))); 
+		
+		
+			/* Map<Integer,Set<String>> map2 = 
+					 Coders.stream()
+					              .filter(loc -> loc.getLoc() >= 50000)
+					              .collect(groupingBy(Coders::getLang, mapping(Coders::getCity,toSet())));*/
+			 
+			 Optional<String> map3 =  Coders.stream()
+		             .filter(y -> y.getYear() == 2010 && y.getLang().equals("PYTHON")).max((o1,o2)-> o1.getLoc()-o2.getLoc()).map(Coder::getName);
+			 
+			 System.out.println(map3);
+			
+		}
+
+}

@@ -1,0 +1,17 @@
+1510181965792	Encapsulate field 'photolist'
+1510181978010	Encapsulate field 'latestPhoto'
+1510181989187	Encapsulate field 'earliestPhoto'
+1510187001430	Delete element
+1510187014525	Copy file
+1510187055592	Delete element
+1510187066814	Copy compilation unit
+1510188104983	Encapsulate field 'size'
+1510188277812	Encapsulate field 'date'
+1510202733828	Encapsulate field 'image'
+1510203192235	Encapsulate field 'name'
+1510416096698	Encapsulate field 'image'
+1510416104354	Encapsulate field 'caption'
+1510416113912	Encapsulate field 'tags'
+1510418370257	Rename compilation unit 'AlbumViewController.java'
+1510418444775	Rename resource 'album.fxml'
+1510418512252	Copy compilation unit

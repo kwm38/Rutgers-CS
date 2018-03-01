@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item value="false" key="isRegEx"/>
+		<item value="searchTag" key="selection"/>
+		<item value="false" key="casesensitive"/>
+		<item value="false" key="incremental"/>
+		<item value="true" key="wrap"/>
+		<item value="false" key="wholeword"/>
+		<list key="findhistory">
+			<item value="searchtag"/>
+			<item value="createalbum"/>
+			<item value="remove tags"/>
+			<item value="searchDate"/>
+			<item value="|"/>
+			<item value="earliest"/>
+			<item value="latest"/>
+			<item value="lates"/>
+		</list>
+		<list key="replacehistory">
+			<item value="scene"/>
+			<item value="view"/>
+			<item value="albumListView"/>
+			<item value="albumList"/>
+			<item value="listOfAlbums"/>
+			<item value="notSafeSpace"/>
+			<item value="board[0][0].name.equals(&quot;false&quot;);"/>
+			<item value="board[0][0].name.equals(&quot;true&quot;);"/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item value="290" key="DIALOG_WIDTH"/>
+		<item value="1|.SF NS Text|11.0|0|COCOA|1|.SFNSText" key="DIALOG_FONT_NAME"/>
+		<item value="409" key="DIALOG_HEIGHT"/>
+		<item value="-67" key="DIALOG_X_ORIGIN"/>
+		<item value="171" key="DIALOG_Y_ORIGIN"/>
+	</section>
+</section>

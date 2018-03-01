@@ -1,0 +1,8 @@
+4
+AA
+BBB
+Cat
+Dog
+AA BBB 3
+Cat Dog 6
+AA Cat 4

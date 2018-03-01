@@ -1,0 +1,13 @@
+package thread1;
+
+import java.util.stream.Stream;
+
+public static enum Language {JAVA, PYTHON, C++, SCALA, C#, PHP}
+
+public class Names{
+
+	public static void main(String[] args) {
+		
+		}
+
+}

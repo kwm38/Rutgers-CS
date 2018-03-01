@@ -1,0 +1,38 @@
+package thread1;
+
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
+
+
+public class Names{
+	
+	
+ 
+
+	public static void main(String[] args) {
+		
+		Coder c1= new Coder("Chris", "colts neck", 1994, 50890, "PYTHON");
+		Coder c2= new Coder("taylor", "colts neck", 2011, 5, "JAVA");
+		Coder c3= new Coder("ben", "marlboro", 2016, 50678, "PHP");
+		Coder c4= new Coder("matt", "freehold", 1987, 20, "C");
+		Coder c5= new Coder("mike", "new brunswick", 2017, 100000, "JAVA");
+		Coder c6= new Coder("sarah", "new york", 2016, 40324, "PYTHON");
+		
+		List<Coder> Coders = Arrays.asList( c1,c2,c3,c4,c5,c6);
+		
+			
+			
+			List<String> map =  Coders.stream().filter(y-> y.getYear() == 2016 && y.getLoc() >= 50000).map(Coder::getName).collect(Collectors.toList());
+
+					
+			for(String s: map){	System.out.println(s); }
+					
+					
+		
+		
+		}
+
+}

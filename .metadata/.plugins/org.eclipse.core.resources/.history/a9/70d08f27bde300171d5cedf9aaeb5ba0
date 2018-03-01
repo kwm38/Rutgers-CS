@@ -1,0 +1,55 @@
+package thread1;
+
+
+
+
+
+
+	
+   public class Coder{
+	
+	 public static enum Language {JAVA, PYTHON, C, SCALA, PHP}
+	   
+	   
+	public String name;
+	public String city;
+	public int year;
+	public int loc;
+	public String language;
+	
+	public Coder(String name, String city, int year, int loc,  String lang){
+		
+		this.name = name;
+		this.city = city;
+		this.year = year;
+		this.loc = loc;
+		this.language = lang;
+		
+		}
+	
+	  public String getName(){
+		   
+		   return this.name;
+		   
+	   }
+	  public String getCity(){
+		   
+		   return this.city;
+		   
+	   }
+	  public int getYear(){
+		   
+		   return this.year;
+		   
+	   }
+	  public int loc(){
+		   
+		   return this.loc;
+		   
+	   }
+	  public String getLang(){
+		   
+		   return this.language;
+		   
+	   }
+   }

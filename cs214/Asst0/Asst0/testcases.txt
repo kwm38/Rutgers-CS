@@ -1,0 +1,181 @@
+1. No alphabetic characters	
+
+Input: "12^3,5"		
+
+Output: 
+
+2.No argument passed		
+
+Input: ./stringsorter	
+
+Output: An invalid number of arguments, please only have one argument
+
+3.Argument is a file		
+
+Input:./stringsorter file.txt	
+
+Output: 
+
+file
+txt
+
+4.More than one separator between strings		
+
+Input: "hello,2professor"	
+
+Output: 
+
+hello
+professor
+
+5.Empty argument string			
+
+Input: ""			
+
+Output: 
+
+6.String consisting of only one string	
+
+Input: "Hello"
+
+Output: 
+
+Hello
+
+7.String consisting of multiple strings	
+
+Input: "Hello,how are4u?"	
+
+Output: 
+
+Hello	
+are 
+how 
+u
+
+8.String with mixed letters	
+
+Input: "a2b A,B1aB^Ab"	
+
+Output: 
+A
+Ab
+B
+a
+aB
+b
+
+9.Inputs with long words 
+
+Input:"OHHHHHHHHHHHHHHHHHHHHHHHPPPPPPPPPPPPPLLLLLLLLLLLLEASSSSSSSSSSSEEEEEEEEEWOOOOOORKKKKKKKKOHHHHHHHHHHHHHHHHHHHHHHHPPPPPPPPPPPPPLLLLLLLLLLLLEASSSSSSSSSSSEEEEEEEEEWOOOOOORKKKKKKKKOHHHHHHHHHHHHHHHHHHHHHHHPPPPPPPPPPPPPLLLLLLLLLLLLEASSSSSSSSSSSEEEEEEEEEWOOOOOORKKKKKKKK%DEFFINIIINITTEEELLLLLYYYYYYYshouldBEfirst?PERHAPS NOT*BecAuse@He is firsT,Who me?No^Adrian"
+
+Output: 
+
+Adrian
+BecAuse
+DEFFINIIINITTEEELLLLLYYYYYYYshouldBEfirst
+He	
+NOT
+No
+OHHHHHHHHHHHHHHHHHHHHHHHPPPPPPPPPPPPPLLLLLLLLLLLLEASSSSSSSSSSSEEEEEEEEEWOOOOOORKKKKKKKKOHHHHHHHHHHHHHHHHHHHHHHHPPPPPPPPPPPPPLLLLLLLLLLLLEASSSSSSSSSSSEEEEEEEEEWOOOOOORKKKKKKKKOHHHHHHHHHHHHHHHHHHHHHHHPPPPPPPPPPPPPLLLLLLLLLLLLEASSSSSSSSSSSEEEEEEEEEWOOOOOORKKKKKKKK
+PERHAPS
+Who
+firsT
+is
+me
+
+10. Argument is all spaces 
+
+Input: "            "
+
+Output: 
+
+11. All of the input strings are the same word with various capital and lowercase letters
+
+Input: "systeM+System%sysTem-systEm0sYstem@syStem"
+
+Output: 
+
+System
+sYstem
+syStem
+sysTem
+systEm
+systeM
+
+12. Alphabet consisting of lower and upper case letters
+
+Input: "p o l k m j i u n b h y t g v f r c d e x s w q a z\Q1A2Z3X4S5W6E7D8C9V7F6R0T-G=B-N-H-Y0U0J0M9I9K9L8O8P"
+
+Output: 
+A
+B
+C
+D
+E
+F
+G
+H
+I
+J
+K
+L
+M
+N
+O
+P
+Q
+R
+S
+T
+U
+V
+W
+X
+Y
+Z
+a
+b
+c
+d
+e
+f	
+g
+h
+i
+j
+k
+l
+m
+n
+o
+p
+q
+r
+s
+t
+u
+v
+w
+x
+y
+z
+
+13. A string with a lot of separators 
+
+Input: "why are you so far             10273018273102         123123      help76856 "
+
+Output:
+ 
+are
+far
+help
+so
+why
+you
+
+14.Two or more arguments passed		
+
+Input: ./stringsorter hello hi you 	
+
+Output: An invalid number of arguments, please only have one argument

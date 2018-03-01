@@ -1,0 +1,42 @@
+package thread1;
+
+import java.util.stream.Stream;
+
+//randomly print names 
+
+public class Names implements Runnable {
+
+	public Names(String name) {
+
+		new Thread(this, name).start();
+
+	}
+
+	@Override
+	public void run() {
+
+		for (int i = 0; i < 4; i++) {
+
+			System.out.println(Thread.currentThread().getName());
+
+			try {
+
+				Thread.sleep((int) Math.random() * 1000);
+
+			} catch (Exception e) {
+
+			}
+
+		}
+
+	}
+
+	public static void main(String[] args) {
+
+		new Names("Chris");
+		new Names("Taylor");
+		
+		Stream.iterate("*", s -> s + "*").limit(6).forEach(System.out::println);
+	}
+
+}

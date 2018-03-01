@@ -1,0 +1,20 @@
+8
+Alex
+Anna
+Bobby
+Don
+Edith
+Jackie
+Sid
+Taylor
+Alex Anna 7
+Alex Bobby 3
+Anna Don 1
+Bobby Edith 1
+Edith Don 1
+Edith Sid 10
+Edith Jackie 7
+Don Sid 2
+Sid Jackie 6
+Jackie Taylor 2
+Sid Taylor 2

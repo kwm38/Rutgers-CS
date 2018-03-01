@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;SongLib.fxml&apos; to &apos;PhotoAlbum27/src/views&apos;&#x0A;- Original project: &apos;songlib&apos;&#x0A;- Destination element: &apos;PhotoAlbum27/src/views&apos;&#x0A;- Original element: &apos;SongLib.fxml&apos;" description="Copy file" destination="=PhotoAlbum27/src&lt;views" element1="src/application/SongLib.fxml" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1509561109416" units="0" version="1.0"/>
+</session>

@@ -1,0 +1,21 @@
+With our own implemented work load we decided to try two similar test cases. 
+In the first test case we pick a random number between 2 and 64 then malloc() with that size as many times as we can.
+From there we free every other pointer, and malloc() the size-1 (which is why our range is 2-64, as we cannot malloc() 0 bytes)
+as many times as we can. This will give every new smaller block of memory one extra byte then intended, 
+because splitting the memory with 1 free block as the remainder makes no sense. 
+So if we malloc()ed 15 bytes as many times as we could, free()d every other node, then malloc()ed 14 bytes as many times as we could, 
+we would actually just be getting pointers to 15 byte chunks of memory. 
+We did this case to check our splitting functionality. 
+
+With our second test case, we did something similar. 
+We followed the same procedure, except instead of re-malloc()ing the size -1 , 
+we re-malloc()ed the size -5. This now allowed the splitting functionality to work properly, 
+creating chunks of free space that we did not need for our allocation. 
+For this to work, we changed our range of random numbers to be 10-64.
+Our findings conclude, that because we had our metadata represented as one character, 
+and that we did not use any structs, we could allocate much more memory than had we used a linked list as our metadata. 
+Each allocation takes at most the size of memory plus or minus one byte for metadata. 
+This allowed us to be much more efficient with our memory usage. 
+Because our memory size was only 5000, our program executed our test cases very quickly
+
+Example images of our test case outcomes can be found in the readme.

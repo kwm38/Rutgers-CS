@@ -1,0 +1,19 @@
+package thread1;
+
+import java.util.stream.Stream;
+
+
+
+public class Names{
+	
+
+	public static void main(String[] args) {
+		
+		Coder c1= new Coder(null, null, 0, 0, null);
+		
+		System.out.println(c1.getCity());
+		
+		
+		}
+
+}

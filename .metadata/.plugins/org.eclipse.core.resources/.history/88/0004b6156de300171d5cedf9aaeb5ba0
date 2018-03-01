@@ -1,0 +1,41 @@
+package recitation;
+
+public class StopWatchThread implements Runnable{
+	
+	private Watch w;
+	public boolean quit = false;
+	public boolean start = true;
+	public boolean reset = false;
+	public long startTime; 
+	// delay is five second
+	int delay = 5000;
+	public void run() {
+		startTime = System.currentTimeMillis();
+		w = new Watch();
+		// animation loop
+		while (true) {
+		    System.out.println();
+			if (quit)
+				break;
+			if (reset){
+				w.reset();
+				startTime = System.currentTimeMillis();
+				reset = false;
+			}
+			if (start)
+			{
+				try {
+					startTime += delay;
+					Thread.sleep(Math.max(0, startTime - System.currentTimeMillis()));
+					w.stepUp();
+				} catch (InterruptedException e) {
+				}
+				
+			}
+			
+		}
+	}
+
+}
+
+}
