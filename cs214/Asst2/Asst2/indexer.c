@@ -1,24 +1,31 @@
 #include "indexer.h"
 
+/* global variable that points to our BST which holds all of our data */
 Node * head;
+
 /* main function that exectures our indexer */
 int main(int argc, char** argv){
     
+    /* must have 3 arguements -- program writepath readpath -- */
     if(argc != 3){
         printf("An invalid number of  arguements, we need two arguements total (not including the program)\n");
         exit(0);
         
-    }else if(strcmp(argv[1],"") ==0 || argv[1] == NULL){
+    }else if(strcmp(argv[1],"") == 0 || argv[1] == NULL){
         
         printf("Invalid Output File Name");
         exit(0);
         
-    }else if(strcmp(argv[2],"") ==0 || argv[2] == NULL){
+    }else if(strcmp(argv[2],"") == 0 || argv[2] == NULL){
         
         printf("Invalid Input File Name");
         exit(0);
     }
     
+    /*
+     * check to make sure we have permission to write to our output file
+     * if it doesn't exist, create it with read write execute permissions
+     */
     int outputCheck = open(argv[1], O_RDWR|O_CREAT, 0777);
     
     if(outputCheck == -1){
@@ -57,7 +64,7 @@ int main(int argc, char** argv){
 /* opens argv[2] and determines whether or not it is a file or directory */
 void openSource(char* argv){
     
-    
+    /* open the source file */
     int fd = open(argv, O_RDONLY);
     
     if(fd == -1){
@@ -68,7 +75,7 @@ void openSource(char* argv){
     
     int type = 0;
     type = isDirectory(argv);
-    
+    /* if its a directory */
     if(type == 1){
         
         close(fd);
@@ -78,6 +85,7 @@ void openSource(char* argv){
     }
     
     type = isFile(argv);
+    /* if its a file */
     if(type == 1){
         
         char * name = getName(argv);
@@ -85,7 +93,7 @@ void openSource(char* argv){
         readFile(fd, name);
         return;
     }
-    
+    /* neither a file nor directory */
     printf("Your input is not a readable file nor directory\n");
     exit(0);
     
@@ -138,17 +146,18 @@ void readDir(DIR * fdDir){
         dir = readdir(fdDir);
         
         while ((dir = readdir(fdDir)) != NULL){
-            // printf("%s\n", dir->d_name);
-            if(dir->d_type == DT_REG ){//}&& strcmp(dir->d_name, ".git") != 0){
+            
+            /* our dirent structure holds a file */
+            if(dir->d_type == DT_REG ){
                 
                 //  printf("%s\n", dir->d_name);
                 int fd = openat(dirfd(fdDir), dir->d_name, O_RDONLY);
                 readFile(fd, lowerName(dir->d_name));
                 
             }
+            /* our dirent structure holds a directory */
             if(dir->d_type == DT_DIR && strcmp(dir->d_name, ".git") != 0 && strcmp(dir->d_name, ".metadata") != 0){
                 
-                //  printf("%s\n", dir->d_name);
                 int fd = openat(dirfd(fdDir), dir->d_name, O_RDONLY);
                 DIR * child = fdopendir(fd);
                 readDir(child);
@@ -157,13 +166,11 @@ void readDir(DIR * fdDir){
     }
     
     closedir(fdDir);
-    
     return;
 }
 
 /* takes in a file descriptor as an arguement, and parses the file for string tokens. All tokens are inserted into a BST*/
 void readFile(int fd, char * name){
-    
     
     char * word = malloc(sizeof(char) * 2);
     int sizeOfWord = 0;
@@ -172,34 +179,57 @@ void readFile(int fd, char * name){
     
     while(read(fd,x,1) != 0){
         
-        if(isalpha(*x) == 0){
+        /* if what we read in is not an alphabetical character or is not 0 - 9 continue */
+        if(isalpha(*x) != 1 && !ValidDigit(x)){
+            
+            continue;
+            /* if what we read in is 0 - 9 but our token is empty, continue because tokens cant start with numbers */
+        }else if(ValidDigit(x) && strlen(word) < 2){
+            
             continue;
         }
-        
-        while(isalpha(*x) != 0){
+        /* if what we read in is alphabetical or 0 - 9 and our token starts with a letter */
+        while(isalpha(*x) != 0 || (ValidDigit(x) && strlen(word) > 2)){
             
             sizeOfWord ++;
             word = realloc(word, sizeOfWord + 1);
             word[pos] = tolower(*x);
             word[pos + 1] = '\0';
             ++pos;
-            //printf("%c",*x);
             if( read(fd,x,1) == 0){
                 
                 break;
             }
         }
-        //printf("\n");
         head =  insert(head, word, name, sizeOfWord);
-        free(word);
+        word = NULL;
         pos = 0;
         sizeOfWord =0;
-        word = malloc(sizeof(char) * 1);
-        
+        word = malloc(sizeof(char) * 2);
     }
     
     close(fd);
     return;
+}
+/* checks to make sure the digit in our token is valid */
+int ValidDigit(char* x){
+    
+    switch(*x){
+            
+        case '0':
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+        case '8':
+        case '9':
+            return 1;
+    }
+    
+    return 0;
 }
 
 /* inserts a new word into the best. If the word already exists, increment the count for that word in its respective file */
@@ -221,27 +251,24 @@ Node* insert(Node *head, char* word,char* name, int size){
     }
     
     if(strcmp(head->word, word) == 0 ){
-        // printf("worde %s", head->word);
         
         File * temp = head->fileList;
         File * prev = NULL;
-        // int inserted = 0;
         
         while(temp != NULL){
             
             if(strcmp(temp->name, name) == 0){
                 
                 ++temp->count;
-                // inserted = 1;
                 break;
             }
             prev = temp;
             temp = temp->next;
         }
         
+        /* we found no file in the word's file list that matches the file we have open, so lets add this open file to the words file list */
         if(temp == NULL){
-            // printf("neq name %s\n", name);
-            // printf("neq name %s\n", temp->name);
+            
             temp = (File *) malloc(sizeof(File));
             temp->name = malloc(sizeof(char) * strlen(name) + 1);
             strcpy(temp->name,name);
@@ -276,10 +303,9 @@ char * lowerName(char * name){
     }
     
     return lowerName;
-    
 }
 
-/* prints the content of the BST */
+/* prints the content of the BST then frees the node and its file list*/
 void printAndFree(FILE * output, Node * head, int permission){
     
     if(head->right != NULL){
