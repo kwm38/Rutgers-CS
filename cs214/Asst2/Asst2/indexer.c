@@ -19,7 +19,7 @@ int main(int argc, char** argv){
         exit(0);
     }
     
-    int outputCheck = open (argv[1], O_CREAT, O_RDWR);
+    int outputCheck = open(argv[1], O_RDWR|O_CREAT, 0777);
     
     if(outputCheck == -1){
         
