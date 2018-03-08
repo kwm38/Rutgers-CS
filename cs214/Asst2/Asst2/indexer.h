@@ -54,5 +54,5 @@ void readDir(DIR * fdDir);
 void readFile(int fd, char * name);
 int isDirectory( const char *path);
 int isFile( const char *path);
-
+char * getName(char * argv);
 #endif
