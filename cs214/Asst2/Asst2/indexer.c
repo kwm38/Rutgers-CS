@@ -26,11 +26,40 @@ int main(int argc, char** argv){
      * check to make sure we have permission to write to our output file
      * if it doesn't exist, create it with read write execute permissions
      */
-    int outputCheck = open(argv[1], O_RDWR|O_CREAT, 0777);
+    int outputCheck = open(argv[1], O_RDWR| O_CREAT, 0666);
     
-    if(outputCheck == -1){
+    /* if we have permission to write to the file and it exists , ask if user wants to overwrite it, else if no permission exit */
+    if(outputCheck > 0){
         
-        printf("%s for the write to file\n",strerror(errno));
+        char answer = 0;
+        char garbage = 0;
+        printf("A file with the name %s already exists or was just created. Do you want to overwrite or write to it? Enter Y or N\n", argv[1]);
+        
+        while (answer != 'y' && answer != 'n' && garbage != 10){
+            
+            scanf("%c", &answer);
+            scanf("%c", &garbage);
+            fseek(stdin,0,SEEK_END);
+            
+            if(answer == 'n' && garbage == 10){
+                
+                printf("We will not overwrite the file. Closing program.\n");
+                return 0;
+                
+            }else if(answer == 'y' && garbage == 10){
+                
+                break;
+                
+            }else {
+                
+                printf("Invalid input. Enter Y or N.\n");
+                garbage = 0;
+                answer = 0;
+            }
+        }
+    }else{
+        
+        printf("We do not have permission to write to the file %d \n", outputCheck);
         exit(0);
     }
     
@@ -55,9 +84,6 @@ int main(int argc, char** argv){
             printf("We could not find and/or read any files\n");
             exit(0);
         }
-        
-        printf("We do not have permission to write to the file\n");
-        exit(0);
     }
     return 0;
 }
@@ -69,7 +95,7 @@ void openSource(char* argv){
     
     if(fd == -1){
         
-        printf("%s for the read from file\n",strerror(errno));
+        printf("%s for the read from file %s\n",strerror(errno), argv);
         return;
     }
     
@@ -152,15 +178,30 @@ void readDir(DIR * fdDir){
                 
                 //  printf("%s\n", dir->d_name);
                 int fd = openat(dirfd(fdDir), dir->d_name, O_RDONLY);
-                readFile(fd, lowerName(dir->d_name));
                 
+                if(fd >0){
+                    readFile(fd, lowerName(dir->d_name));
+                    
+                }else{
+                    
+                    printf("%s for the read from file %s\n",strerror(errno), dir->d_name);
+                    continue;
+                }
             }
             /* our dirent structure holds a directory */
             if(dir->d_type == DT_DIR && strcmp(dir->d_name, ".git") != 0 && strcmp(dir->d_name, ".metadata") != 0){
                 
                 int fd = openat(dirfd(fdDir), dir->d_name, O_RDONLY);
-                DIR * child = fdopendir(fd);
-                readDir(child);
+                
+                if(fd >0){
+                    
+                    DIR * child = fdopendir(fd);
+                    readDir(child);
+                }else {
+                    
+                    printf("%s for the read from file %s\n",strerror(errno), dir->d_name);
+                    continue;
+                }
             }
         }
     }
@@ -186,7 +227,7 @@ void readFile(int fd, char * name){
             continue;
             /* if what we read in is 0 - 9 but our token is empty, continue because tokens cant start with numbers */
         }else if(ValidDigit(x) && strlen(word) < 2){
-         
+            
             continue;
         }
         /* if what we read in is alphabetical or 0 - 9 and our token starts with a letter */
@@ -208,7 +249,7 @@ void readFile(int fd, char * name){
         sizeOfWord =0;
         word = malloc(sizeof(char) * 2);
         word[1] = '\0';
-
+        
     }
     
     close(fd);
