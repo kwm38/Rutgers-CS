@@ -235,7 +235,7 @@ int ValidDigit(char* x){
     return 0;
 }
 
-/* inserts a new word into the best. If the word already exists, increment the count for that word in its respective file */
+/* inserts a new word into the BST. If the word already exists, increment the count for that word in its respective file */
 Node* insert(Node *head, char* word,char* name, int size){
     
     if(head == NULL){
