@@ -60,7 +60,7 @@ int main(int argc, char** argv){
         }
     }else{
         
-        printf("We do not have permission to write to the file %d \n", outputCheck);
+        printf("We do not have permission to write to the file %s \n", argv[1]);
         exit(0);
     }
     
