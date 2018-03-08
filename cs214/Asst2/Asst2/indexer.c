@@ -173,6 +173,7 @@ void readDir(DIR * fdDir){
 void readFile(int fd, char * name){
     
     char * word = malloc(sizeof(char) * 2);
+    word[1] = '\0';
     int sizeOfWord = 0;
     int pos = 0;
     char * x = malloc(sizeof(char) * 2);
@@ -180,12 +181,12 @@ void readFile(int fd, char * name){
     while(read(fd,x,1) != 0){
         
         /* if what we read in is not an alphabetical character or is not 0 - 9 continue */
-        if(isalpha(*x) != 1 && !ValidDigit(x)){
+        if(isalpha(*x) == 0 && !ValidDigit(x)){
             
             continue;
             /* if what we read in is 0 - 9 but our token is empty, continue because tokens cant start with numbers */
         }else if(ValidDigit(x) && strlen(word) < 2){
-            
+         
             continue;
         }
         /* if what we read in is alphabetical or 0 - 9 and our token starts with a letter */
@@ -206,6 +207,8 @@ void readFile(int fd, char * name){
         pos = 0;
         sizeOfWord =0;
         word = malloc(sizeof(char) * 2);
+        word[1] = '\0';
+
     }
     
     close(fd);
@@ -344,7 +347,7 @@ File * sortByCount(File * list){
         return list;
     }
     
-    int swapped, i;
+    int swapped;
     File * file1;
     File * lptr = NULL;
     
