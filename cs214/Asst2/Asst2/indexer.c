@@ -105,13 +105,13 @@ void readDir(DIR * fdDir){
         
         while ((dir = readdir(fdDir)) != NULL){
             
-            if(dir->d_type == DT_REG} //&& strcmp(dir->d_name, ".DS_Store") != 0){
+            if(dir->d_type == DT_REG){ //&& strcmp(dir->d_name, ".DS_Store") != 0){
                 
                 //printf("%s\n", dir->d_name);
                 int fd = openat(dirfd(fdDir), dir->d_name, O_RDONLY);
                 readFile(fd, dir->d_name);
             }
-               if(dir->d_type == DT_DIR} //&& strcmp(dir->d_name, ".DS_Store") != 0){
+            if(dir->d_type == DT_DIR){ //&& strcmp(dir->d_name, ".DS_Store") != 0){
                 
                 // printf("%s\n", dir->d_name);
                 int fd = openat(dirfd(fdDir), dir->d_name, O_RDONLY);
