@@ -9,10 +9,13 @@
 #include <ctype.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <time.h>
+#include <sys/time.h>
 #include <fcntl.h>
 #include <errno.h>
 #include <dirent.h>
 #include <unistd.h>
+#include <pthread.h>
 
 /* This struct will be the way we keep track of files that contain a specific word  */
 struct File
@@ -78,6 +81,8 @@ char * getName(char * argv);
  * ValidDigit will check to see if a potential token character is between 0 - 9
  */
 int ValidDigit(char* x);
-
-
+/*
+ * timer will be executed by a thead in order to keep track of and display the running time during the entirety of the program.
+ */
+void * timer ();
 #endif

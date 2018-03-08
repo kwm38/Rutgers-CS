@@ -2,6 +2,7 @@
 
 /* global variable that points to our BST which holds all of our data */
 Node * head;
+int done;
 
 /* main function that exectures our indexer */
 int main(int argc, char** argv){
@@ -65,6 +66,16 @@ int main(int argc, char** argv){
     
     close(outputCheck);
     
+    /* we will have a thread keep track of the running time */
+    pthread_t timer_thread;
+    
+    if(pthread_create(&timer_thread, NULL, timer, NULL)) {
+        
+        fprintf(stderr, "Error creating thread\n");
+        return 1;
+        
+    }
+    
     head = NULL;
     
     openSource(argv[2]);
@@ -85,6 +96,7 @@ int main(int argc, char** argv){
             exit(0);
         }
     }
+    done = 1;
     return 0;
 }
 /* opens argv[2] and determines whether or not it is a file or directory */
@@ -420,4 +432,22 @@ File * sortByCount(File * list){
     while (swapped);
     
     return list;
+}
+
+/* this timer will be excuted by a thread. This will always update the running time and print it to the consol */
+void * timer (){
+    
+    struct timeval begin, end;
+    gettimeofday(&begin, NULL);
+    double elapsed = 0;
+    
+    while (!done){
+        
+        gettimeofday(&end, NULL);
+        elapsed = (end.tv_sec - begin.tv_sec) + ((end.tv_usec - begin.tv_usec)/1000000.0);
+        printf("%lf seconds\r", elapsed);
+        
+    }
+    printf("%lf seconds\n", elapsed);
+    return &done;
 }
