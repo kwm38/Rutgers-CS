@@ -97,8 +97,6 @@ int main(int argc, char** argv){
         }
     }
     done = 1;
-    pthread_cancel(timer_thread);
-    printf("Complete\n");
     return 0;
 }
 /* opens argv[2] and determines whether or not it is a file or directory */
@@ -451,5 +449,6 @@ void * timer (){
         
     }
     printf("%lf seconds\n", elapsed);
+    printf("Complete\n");
     return &done;
 }
