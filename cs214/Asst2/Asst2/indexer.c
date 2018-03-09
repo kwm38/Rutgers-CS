@@ -34,7 +34,7 @@ int main(int argc, char** argv){
         
         char answer = 0;
         char garbage = 0;
-        printf("A file with the name %s already exists or was just created. Do you want to overwrite or write to it? Enter Y or N\n", argv[1]);
+        printf("\nA file with the name %s already exists or was just created. Do you want to overwrite or write to it? Enter Y or N\n", argv[1]);
         
         while (answer != 'y' && answer != 'n' && garbage != 10){
             
@@ -97,6 +97,8 @@ int main(int argc, char** argv){
         }
     }
     done = 1;
+    pthread_cancel(timer_thread);
+    printf("Complete\n");
     return 0;
 }
 /* opens argv[2] and determines whether or not it is a file or directory */
@@ -392,7 +394,7 @@ void printAndFree(FILE * output, Node * head, int permission){
     
     free(head);
 }
-/* sorts the files associated with a word corresponding to their size in descending order */
+/* sorts the files associated with a word corresponding to their count in descending order */
 File * sortByCount(File * list){
     
     if(list == NULL || list->next == NULL){
