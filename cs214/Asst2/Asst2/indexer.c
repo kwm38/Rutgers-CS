@@ -201,7 +201,7 @@ void readDir(DIR * fdDir){
                 }
             }
             /* our dirent structure holds a directory */
-            if(dir->d_type == DT_DIR && strcmp(dir->d_name, ".git") != 0 && strcmp(dir->d_name, ".metadata") != 0){
+            if(dir->d_type == DT_DIR){
                 
                 int fd = openat(dirfd(fdDir), dir->d_name, O_RDONLY);
                 
