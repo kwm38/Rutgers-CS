@@ -1,5 +1,7 @@
 #include "indexer.h"
 
+/* a1 */
+
 /* global variable that points to our BST which holds all of our data */
 Node * head;
 int done;
@@ -243,7 +245,7 @@ void readFile(int fd, char * name){
             continue;
         }
         /* if what we read in is alphabetical or 0 - 9 and our token starts with a letter */
-        while(isalpha(*x) != 0 || (ValidDigit(x) && strlen(word) > 2)){
+        while(isalpha(*x) != 0 || (ValidDigit(x) && strlen(word) >= 1)){
             
             sizeOfWord ++;
             word = realloc(word, sizeOfWord + 1);
