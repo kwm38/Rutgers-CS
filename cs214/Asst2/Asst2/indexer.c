@@ -49,7 +49,7 @@ int main(int argc, char** argv){
                 printf("We will not overwrite the file. Closing program.\n");
                 return 0;
                 
-            }else if(answer == 'y' && garbage == 10){
+            }else if(tolower(answer) == 'y' && garbage == 10){
                 
                 break;
                 
@@ -129,7 +129,7 @@ void openSource(char* argv){
     if(type == 1){
         
         char * name = getName(argv);
-        name = lowerName(name);
+       // name = lowerName(name);
         readFile(fd, name);
         return;
     }
@@ -194,7 +194,7 @@ void readDir(DIR * fdDir){
                 int fd = openat(dirfd(fdDir), dir->d_name, O_RDONLY);
                 
                 if(fd >0){
-                    readFile(fd, lowerName(dir->d_name));
+                    readFile(fd, dir->d_name);
                     
                 }else{
                     
@@ -347,8 +347,8 @@ Node* insert(Node *head, char* word,char* name, int size){
     return head;
 }
 
-
-/* converts the files name to lowercase */
+/*
+// converts the files name to lowercase
 char * lowerName(char * name){
     
     char * lowerName = malloc(sizeof(char)* strlen(name) + 1);
@@ -362,6 +362,8 @@ char * lowerName(char * name){
     
     return lowerName;
 }
+
+*/
 
 /* prints the content of the BST then frees the node and its file list*/
 void printAndFree(FILE * output, Node * head, int permission){
