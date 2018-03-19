@@ -16,6 +16,7 @@
 #include <dirent.h>
 #include <unistd.h>
 #include <pthread.h>
+#include <math.h>
 
 /* This struct will be the way we keep track of files that contain a specific word  */
 struct File

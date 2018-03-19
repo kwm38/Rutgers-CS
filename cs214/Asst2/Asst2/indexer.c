@@ -1,7 +1,5 @@
 #include "indexer.h"
 
-/* a1 */
-
 /* global variable that points to our BST which holds all of our data */
 Node * head;
 int done;
@@ -73,7 +71,7 @@ int main(int argc, char** argv){
     
     if(pthread_create(&timer_thread, NULL, timer, NULL)) {
         
-        fprintf(stderr, "Error creating thread\n");
+        printf("Error creating thread\n");
         return 1;
         
     }
@@ -129,7 +127,7 @@ void openSource(char* argv){
     if(type == 1){
         
         char * name = getName(argv);
-       // name = lowerName(name);
+        // name = lowerName(name);
         readFile(fd, name);
         return;
     }
@@ -346,24 +344,6 @@ Node* insert(Node *head, char* word,char* name, int size){
     }
     return head;
 }
-
-/*
-// converts the files name to lowercase
-char * lowerName(char * name){
-    
-    char * lowerName = malloc(sizeof(char)* strlen(name) + 1);
-    
-    int i=0;
-    for(i=0; i< strlen(name) + 1; i ++){
-        
-        lowerName[i] = tolower(name[i]);
-        
-    }
-    
-    return lowerName;
-}
-
-*/
 
 /* prints the content of the BST then frees the node and its file list*/
 void printAndFree(FILE * output, Node * head, int permission){
