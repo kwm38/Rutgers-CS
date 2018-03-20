@@ -79,6 +79,10 @@ int isFile( const char *path);
  */
 char * getName(char * argv);
 /*
+ * lowerName will take the filename and turn it to lowercase
+ */
+char * lowerName(char * name);
+/*
  * ValidDigit will check to see if a potential token character is between 0 - 9
  */
 int ValidDigit(char* x);

@@ -127,7 +127,7 @@ void openSource(char* argv){
     if(type == 1){
         
         char * name = getName(argv);
-        // name = lowerName(name);
+        name = lowerName(name);
         readFile(fd, name);
         return;
     }
@@ -159,6 +159,23 @@ char * getName(char * argv){
     strncpy(name, argv + difference, size);
     name[size] = '\0';
     return name;
+}
+/* helper method to convert the filename to lowercase */
+char * lowerName(char * name){
+    
+    int size = strlen(name) + 1;
+    
+    char * returnValue = malloc(size);
+    
+    int i =0;
+    
+    for(i = 0; i <size; i++){
+        
+        returnValue[i] = tolower(name[i]);
+        
+    }
+    
+    return returnValue;
 }
 /* checks to see if the file descriptor is a directory */
 int isDirectory( const char *path){
@@ -192,7 +209,7 @@ void readDir(DIR * fdDir){
                 int fd = openat(dirfd(fdDir), dir->d_name, O_RDONLY);
                 
                 if(fd >0){
-                    readFile(fd, dir->d_name);
+                    readFile(fd, lowerName(dir->d_name));
                     
                 }else{
                     
@@ -384,7 +401,7 @@ File * sortByCount(File * list){
         return list;
     }
     
-    int swapped;
+    int swapped, swapme;
     File * file1;
     File * lptr = NULL;
     
@@ -395,6 +412,18 @@ File * sortByCount(File * list){
         while (file1->next != lptr) {
             
             if (file1->count < file1->next->count){
+                
+                swapme = 1;
+                
+            }else if (file1->count == file1->next->count){
+                
+                if (strcmp(file1->name,file1->next->name) > 0){
+                    
+                    swapme = 1;
+                }
+            }
+            
+            if(swapme){
                 
                 int temp = file1->count;
                 char * tempString = malloc(sizeof(char) * strlen(file1->name) + 1);
@@ -408,8 +437,10 @@ File * sortByCount(File * list){
                 file1->count = file1->next->count;
                 file1->next->count = temp;
                 swapped = 1;
+                
             }
             file1 = file1->next;
+            swapme = 0;
         }
         lptr = file1;
     }
