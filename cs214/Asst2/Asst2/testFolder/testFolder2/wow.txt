@@ -1,0 +1,2 @@
+This is file is named wow.txt
+It lives in a folder named testFolder2

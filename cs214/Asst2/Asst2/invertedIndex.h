@@ -1,5 +1,5 @@
-#ifndef indexer_h
-#define indexer_h
+#ifndef invertedIndex_h
+#define invertedIndex_h
 
 #include <stdio.h>
 #include <stdlib.h>

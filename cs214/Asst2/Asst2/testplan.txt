@@ -1,0 +1,205 @@
+--- Test Plan ---
+
+
+to test the program type with your own test cases when in the project directory type:
+
+	invertedIndex <output file name> <input file/directory path>
+
+The program will first check if the output file exists, if it does it check permissions.
+
+If we can not write to the output file then we can not continue the program. 
+If the output file does exist then we ask if the user wishes to overwrite it. Continue if yes, exit if no. 
+If the file does not exist, create it and ask if the user wants to write to it. Continue if yes, exit if no. 
+
+If we continue, the program will check if the path represents a file or directory. 
+
+If the path represents a file, we will check all of the words in the file and print them in the requested XML format. 
+
+If the path represents a directory, we will go int to the directory, and from there we will scan the directory and check for further files/ directories. 
+
+There is a separate thread that will run and constantly output the runtime of the program to the console. 
+
+Once the program is done scanning for files and directories it will print out the xml format to the output file. 
+
+It will print all words in alphabetical order a->z and all files that contain that word in count order 1->2+
+
+If two files have the same count for a word, the will be in filename alphabetical order. An example will be presented bellow. 
+
+--- Large Scale ---
+
+
+In a large scale test case this program works just fine. While testing we wrote a 120 MB file which took about 5 minutes to run. 
+
+The program was able to scan music files, pdf files, md files, directories, hidden directories etc. 
+
+While testing for large programs, be aware it will take some time, but the time will constantly be output to the console the entirety of the duration. 
+
+--- Included Test Case ---
+
+NOTE * The test cases found are not too complicated as the directions said to keep the files small *
+
+In this project is a folder called testFolder. 
+
+testFolder contains files and directories.
+
+All of the files contain text, however not all files end with an extension.
+
+Some files may even have the same name.
+
+to test the program when you are in the project directory type: 
+
+	./invertedIndex results.txt testFolder/
+
+
+output: 
+
+<"?xml version="1.0" encoding="UTF-8"?>
+<fileIndex>
+	<word text="a">
+		<file name="test">2</file>
+		<file name="test.txt">1</file>
+		<file name="testt.txt">1</file>
+		<file name="wow.txt">1</file>
+	<word text="all">
+		<file name="hello.txt">1</file>
+	<word text="appeared">
+		<file name="test">1</file>
+	<word text="ar3">
+		<file name="test.txt">1</file>
+	<word text="b">
+		<file name="test.txt">1</file>
+	<word text="bannanas">
+		<file name="testt.txt">1</file>
+	<word text="c">
+		<file name="test.txt">1</file>
+	<word text="d">
+		<file name="test.txt">1</file>
+	<word text="does">
+		<file name="hello.txt">1</file>
+	<word text="dun">
+		<file name="test">2</file>
+	<word text="dunnnnn">
+		<file name="test">1</file>
+	<word text="e">
+		<file name="test.txt">1</file>
+	<word text="ecan12312">
+		<file name="test">1</file>
+	<word text="f">
+		<file name="test.txt">1</file>
+	<word text="file">
+		<file name="wow.txt">1</file>
+	<word text="files">
+		<file name="test">1</file>
+	<word text="folder">
+		<file name="wow.txt">1</file>
+	<word text="fun">
+		<file name="systems.txt">1</file>
+	<word text="g">
+		<file name="test.txt">1</file>
+	<word text="get">
+		<file name="hello.txt">1</file>
+	<word text="god">
+		<file name="test">1</file>
+	<word text="going">
+		<file name="test">1</file>
+	<word text="h">
+		<file name="test.txt">1</file>
+	<word text="h0w">
+		<file name="test.txt">1</file>
+	<word text="hell0">
+		<file name="test.txt">1</file>
+	<word text="how">
+		<file name="test">1</file>
+	<word text="i">
+		<file name="test.txt">1</file>
+	<word text="if">
+		<file name="hello.txt">1</file>
+		<file name="test">1</file>
+	<word text="in">
+		<file name="wow.txt">1</file>
+	<word text="information">
+		<file name="hello.txt">1</file>
+	<word text="is">
+		<file name="wow.txt">2</file>
+		<file name="recursive.txt">1</file>
+		<file name="systems.txt">1</file>
+		<file name="test">1</file>
+	<word text="it">
+		<file name="hello.txt">1</file>
+		<file name="wow.txt">1</file>
+		<file name="recursive.txt">1</file>
+	<word text="j">
+		<file name="test.txt">1</file>
+	<word text="k">
+		<file name="test.txt">1</file>
+	<word text="l">
+		<file name="test.txt">1</file>
+	<word text="lets">
+		<file name="hello.txt">1</file>
+	<word text="likes">
+		<file name="testt.txt">1</file>
+	<word text="lives">
+		<file name="wow.txt">1</file>
+	<word text="m">
+		<file name="test.txt">1</file>
+	<word text="many">
+		<file name="test">1</file>
+	<word text="me">
+		<file name="test">1</file>
+	<word text="monkey">
+		<file name="testt.txt">1</file>
+	<word text="my">
+		<file name="test">1</file>
+	<word text="n">
+		<file name="test.txt">1</file>
+	<word text="named">
+		<file name="test">1</file>
+		<file name="wow.txt">2</file>
+	<word text="o">
+		<file name="test.txt">1</file>
+	<word text="or">
+		<file name="recursive.txt">1</file>
+	<word text="p">
+		<file name="test.txt">1</file>
+	<word text="program">
+		<file name="hello.txt">1</file>
+		<file name="test">1</file>
+	<word text="programming">
+		<file name="systems.txt">1</file>
+	<word text="recursive">
+		<file name="recursive.txt">1</file>
+	<word text="see">
+		<file name="hello.txt">1</file>
+	<word text="systems">
+		<file name="systems.txt">1</file>
+	<word text="test">
+		<file name="test">2</file>
+	<word text="testfolder2">
+		<file name="wow.txt">1</file>
+	<word text="the">
+		<file name="hello.txt">1</file>
+	<word text="this">
+		<file name="hello.txt">1</file>
+		<file name="test">1</file>
+		<file name="wow.txt">1</file>
+	<word text="to">
+		<file name="test">1</file>
+	<word text="txt">
+		<file name="wow.txt">1</file>
+	<word text="well">
+		<file name="hello.txt">1</file>
+	<word text="wild">
+		<file name="test">1</file>
+	<word text="work">
+		<file name="test">1</file>
+	<word text="works">
+		<file name="hello.txt">1</file>
+	<word text="wow">
+		<file name="wow.txt">2</file>
+		<file name="hello.txt">1</file>
+		<file name="test">1</file>
+	<word text="y0u">
+		<file name="test.txt">1</file>
+	<word text="you">
+		<file name="test">1</file>
+<fileIndex>

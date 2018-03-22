@@ -1,7 +1,8 @@
-#include "indexer.h"
+#include "invertedIndex.h"
 
 /* global variable that points to our BST which holds all of our data */
 Node * head;
+/* global variable used to let the tiem thread know when to stop*/
 int done;
 
 /* main function that exectures our indexer */
@@ -22,7 +23,6 @@ int main(int argc, char** argv){
         printf("Invalid Input File Name");
         exit(0);
     }
-    
     /*
      * check to make sure we have permission to write to our output file
      * if it doesn't exist, create it with read write execute permissions
@@ -73,11 +73,10 @@ int main(int argc, char** argv){
         
         printf("Error creating thread\n");
         return 1;
-        
     }
     
     head = NULL;
-    
+    /* open the source path and start the program */
     openSource(argv[2]);
     
     if(head != NULL){
@@ -164,15 +163,12 @@ char * getName(char * argv){
 char * lowerName(char * name){
     
     int size = strlen(name) + 1;
-    
     char * returnValue = malloc(size);
-    
     int i =0;
     
     for(i = 0; i <size; i++){
         
         returnValue[i] = tolower(name[i]);
-        
     }
     
     return returnValue;
@@ -205,10 +201,9 @@ void readDir(DIR * fdDir){
             /* our dirent structure holds a file */
             if(dir->d_type == DT_REG ){
                 
-                //  printf("%s\n", dir->d_name);
                 int fd = openat(dirfd(fdDir), dir->d_name, O_RDONLY);
                 
-                if(fd >0){
+                if(fd > 0){
                     readFile(fd, lowerName(dir->d_name));
                     
                 }else{
@@ -222,7 +217,7 @@ void readDir(DIR * fdDir){
                 
                 int fd = openat(dirfd(fdDir), dir->d_name, O_RDONLY);
                 
-                if(fd >0){
+                if(fd > 0){
                     
                     DIR * child = fdopendir(fd);
                     readDir(child);
@@ -317,7 +312,6 @@ Node* insert(Node *head, char* word,char* name, int size){
         head->fileList = (File*) malloc(sizeof(File));
         head->fileList->name = (char*)malloc(sizeof(char) * strlen(name) + 1);
         strcpy(head->fileList->name,name);
-        
         head->fileList->count = 1;
         head->fileList->next = NULL;
         return head;
@@ -437,8 +431,8 @@ File * sortByCount(File * list){
                 file1->count = file1->next->count;
                 file1->next->count = temp;
                 swapped = 1;
-                
             }
+            
             file1 = file1->next;
             swapme = 0;
         }
