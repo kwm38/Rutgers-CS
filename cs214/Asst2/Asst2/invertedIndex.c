@@ -23,48 +23,51 @@ int main(int argc, char** argv){
         printf("Invalid Input File Name");
         exit(0);
     }
-    /*
-     * check to make sure we have permission to write to our output file
-     * if it doesn't exist, create it with read write execute permissions
-     */
-    int outputCheck = open(argv[1], O_RDWR| O_CREAT, 0666);
     
-    /* if we have permission to write to the file and it exists , ask if user wants to overwrite it, else if no permission exit */
-    if(outputCheck > 0){
+    int outputCheck = -1;
+    
+    /* if the file exists */
+    if(access( argv[1], F_OK ) != -1 ){
         
-        char answer = 0;
-        char garbage = 0;
-        printf("\nA file with the name %s already exists or was just created. Do you want to overwrite or write to it? Enter Y or N\n", argv[1]);
-        
-        while (answer != 'y' && answer != 'n' && garbage != 10){
+        outputCheck = open(argv[1], O_RDWR);
+        /* if we have permission to write to the file, ask if the user wants to overwrite to it */
+        if(outputCheck > 0){
             
-            scanf("%c", &answer);
-            scanf("%c", &garbage);
-            fseek(stdin,0,SEEK_END);
+            char answer = 0;
+            char garbage = 0;
+            printf("\nA file with the name %s already exists. Do you want to overwrite it? Enter Y or N\n", argv[1]);
             
-            if(answer == 'n' && garbage == 10){
+            while (tolower(answer) != 'y' && tolower(answer) != 'n' && garbage != 10){
                 
-                printf("We will not overwrite the file. Closing program.\n");
-                return 0;
+                scanf(" %c", &answer);
+                scanf("%c", &garbage);
+                fseek(stdin,0,SEEK_END);
                 
-            }else if(tolower(answer) == 'y' && garbage == 10){
-                
-                break;
-                
-            }else {
-                
-                printf("Invalid input. Enter Y or N.\n");
-                garbage = 0;
-                answer = 0;
+                if(tolower(answer) == 'n' && garbage == 10){
+                    
+                    printf("We will not overwrite the file. Closing program.\n");
+                    return 0;
+                    
+                }else if(tolower(answer) == 'y' && garbage == 10){
+                    
+                    break;
+                    
+                }else {
+                    
+                    printf("Invalid input. Enter Y or N.\n");
+                    garbage = 0;
+                    answer = 0;
+                }
             }
+            
+        }else{
+            
+            printf("We do not have permission to write to the file %s \n", argv[1]);
+            exit(0);
         }
-    }else{
         
-        printf("We do not have permission to write to the file %s \n", argv[1]);
-        exit(0);
+        close(outputCheck);
     }
-    
-    close(outputCheck);
     
     /* we will have a thread keep track of the running time */
     pthread_t timer_thread;
@@ -72,14 +75,18 @@ int main(int argc, char** argv){
     if(pthread_create(&timer_thread, NULL, timer, NULL)) {
         
         printf("Error creating thread\n");
-        return 1;
+        exit(0);
     }
     
     head = NULL;
+    
     /* open the source path and start the program */
     openSource(argv[2]);
     
     if(head != NULL){
+        
+        /* the file does not exist so create it */
+        outputCheck = open(argv[1], O_RDWR| O_CREAT, 0666);
         
         FILE * output = fopen(argv[1], "w");
         fprintf(output,"<\"?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
@@ -96,6 +103,7 @@ int main(int argc, char** argv){
         }
     }
     done = 1;
+    pthread_join(timer_thread,NULL);
     return 0;
 }
 /* opens argv[2] and determines whether or not it is a file or directory */
@@ -411,9 +419,33 @@ File * sortByCount(File * list){
                 
             }else if (file1->count == file1->next->count){
                 
-                if (strcmp(file1->name,file1->next->name) > 0){
+                int shortestLength = (strlen(file1->name) < strlen(file1->next->name)) ? strlen(file1->name): strlen(file1->next->name);
+                int c = 0;
+                
+                /* Need special conditions because a '.' holds a greater value then any character according to the assignment description */
+                for(c = 0; c < shortestLength; c ++){
                     
-                    swapme = 1;
+                    if(file1->name[c] == file1->next->name[c]){
+                        
+                        continue;
+                        
+                    }else if(file1->name[c] == '.' && file1->next->name[c] != '.'){
+                        
+                        swapme = 1;
+                        break;
+                        
+                    }else if(file1->next->name[c] == '.' && file1->name[c] != '.'){
+                        
+                        swapme = 0;
+                        break;
+                        
+                    }else if(file1->name[c] > file1->next->name[c]){
+                        
+                        swapme = 1;
+                        break;
+                    }
+                    
+                    break;
                 }
             }
             
@@ -450,13 +482,14 @@ void * timer (){
     gettimeofday(&begin, NULL);
     double elapsed = 0;
     
-    while (!done){
+    while(!done){
         
         gettimeofday(&end, NULL);
         elapsed = (end.tv_sec - begin.tv_sec) + ((end.tv_usec - begin.tv_usec)/1000000.0);
         printf("%lf seconds\r", elapsed);
         
     }
+    
     printf("%lf seconds\n", elapsed);
     printf("Complete\n");
     return &done;
