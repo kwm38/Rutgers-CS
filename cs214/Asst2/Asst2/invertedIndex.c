@@ -41,6 +41,12 @@ int main(int argc, char** argv){
                 
                 scanf(" %c", &answer);
                 scanf("%c", &garbage);
+                
+                while(garbage == ' ' || garbage == '\t'){
+                    
+                    scanf("%c", &garbage);
+                }
+                
                 fseek(stdin,0,SEEK_END);
                 
                 if(tolower(answer) == 'n' && garbage == 10){
