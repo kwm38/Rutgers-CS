@@ -439,6 +439,11 @@ File * sortByCount(File * list){
                     /* ex: aaa  aaa */
                     if(file1->name[c] == file1->next->name[c]){
                         
+                        if(c == shortestLength -1){
+                            
+                            swapme = (strlen(file1->name) < strlen(file1->next->name)) ? 0: 1;
+                            break;
+                        }
                         continue;
                         /* ex: aa.  aaa */
                     }else if(file1->name[c] == '.' && file1->next->name[c] != '.'){
@@ -483,6 +488,11 @@ File * sortByCount(File * list){
                         
                         swapme = 1;
                         break;
+                        
+                    }else{
+                        
+                        swapme = 0;
+                        break;
                     }
                     
                     break;
@@ -520,10 +530,16 @@ int sortedInsert(char* treeWord, char* newWord){
     int shortestLength = (strlen(treeWord) < strlen(newWord)) ? strlen(treeWord): strlen(newWord);
     int c = 0;
     
-    for(c =0; c < shortestLength; c ++){
+    for(c = 0; c < shortestLength; c ++){
         
         /* ex: aaa  aaa */
         if(treeWord[c] == newWord[c]){
+            
+            if(c == shortestLength -1){
+                
+                int returnValue = (strlen(treeWord) < strlen(newWord)) ? -1: 1;
+                return returnValue;
+            }
             
             continue;
             
@@ -536,31 +552,30 @@ int sortedInsert(char* treeWord, char* newWord){
             if(one < two){
                 
                 return -1;
-                break;
                 
             }else {
                 
                 /* ex: aa9  aa1 */
                 return 1;
-                break;
             }
             /* ex: aa1  aaa */
         }else if(isdigit(treeWord[c]) && !isdigit(newWord[c])){
             
             return 1;
-            break;
             
             /* ex: aaa  aa1 */
         }else if(!isdigit(treeWord[c]) && isdigit(newWord[c])){
             
             return -1;
-            break;
             
             /* ex: aab  aaa */
         }else if(treeWord[c] > newWord[c]){
             
             return 1;
-            break;
+            
+        }else{
+            
+            return -1;
         }
         
         break;
