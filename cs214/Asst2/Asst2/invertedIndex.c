@@ -357,13 +357,15 @@ Node* insert(Node *head, char* word,char* name, int size){
             temp->next = NULL;
             prev->next = temp;
         }
+        
+        return head;
     }
     
-    if(strcmp(head->word, word) <0 ){
+    if(sortedInsert(head->word, word) < 0 ){
         
         head->left = insert(head->left, word, name, size);
         
-    }else  if(strcmp(head->word, word) >0 ){
+    }else  if(sortedInsert(head->word, word) >0 ){
         
         head->right = insert(head->right, word, name, size);
     }
@@ -392,6 +394,7 @@ void printAndFree(FILE * output, Node * head, int permission){
             head->fileList = head->fileList->next;
             free(prev);
         }
+        fprintf(output, "\t<x/word>\n");
     }
     
     if(head->left != NULL){
@@ -428,23 +431,54 @@ File * sortByCount(File * list){
                 int shortestLength = (strlen(file1->name) < strlen(file1->next->name)) ? strlen(file1->name): strlen(file1->next->name);
                 int c = 0;
                 
-                /* Need special conditions because a '.' holds a greater value then any character according to the assignment description */
+                /* Need special conditions because a '.' holds a greater value then any character according to the assignment description
+                 * All numbers also come after all letter, so a<0<. , a<b<1<2<.    etc
+                 */
                 for(c = 0; c < shortestLength; c ++){
                     
+                    /* ex: aaa  aaa */
                     if(file1->name[c] == file1->next->name[c]){
                         
                         continue;
-                        
+                        /* ex: aa.  aaa */
                     }else if(file1->name[c] == '.' && file1->next->name[c] != '.'){
                         
                         swapme = 1;
                         break;
                         
+                        /* ex: aaa  aa. */
                     }else if(file1->next->name[c] == '.' && file1->name[c] != '.'){
                         
                         swapme = 0;
                         break;
                         
+                        /* ex: aa1  aa0 */
+                    }else if(isdigit(file1->name[c]) && isdigit(file1->next->name[c])){
+                        
+                        int one = file1->name[c] - 0;
+                        int two = file1->next->name[c] - 0;
+                        
+                        if(one > two){
+                            
+                            swapme = 1;
+                            break;
+                        }
+                        /* ex: aa0  aa9 */
+                        swapme = 0;
+                        break;
+                        
+                        /* ex: aa1  aaa */
+                    }else if(isdigit(file1->name[c]) && !isdigit(file1->next->name[c])){
+                        
+                        swapme = 1;
+                        break;
+                        
+                        /* ex: aaa  aa1 */
+                    }else if(!isdigit(file1->name[c]) && isdigit(file1->next->name[c])){
+                        
+                        swapme = 0;
+                        break;
+                        /* ex: aab  aaa */
                     }else if(file1->name[c] > file1->next->name[c]){
                         
                         swapme = 1;
@@ -479,6 +513,60 @@ File * sortByCount(File * list){
     while (swapped);
     
     return list;
+}
+/* this tis used to make sure we insert the words into our BST properly */
+int sortedInsert(char* treeWord, char* newWord){
+    
+    int shortestLength = (strlen(treeWord) < strlen(newWord)) ? strlen(treeWord): strlen(newWord);
+    int c = 0;
+    
+    for(c =0; c < shortestLength; c ++){
+        
+        /* ex: aaa  aaa */
+        if(treeWord[c] == newWord[c]){
+            
+            continue;
+            
+            /* ex: aa1  aa0 */
+        }else if(isdigit(treeWord[c]) && isdigit(newWord[c])){
+            
+            int one = treeWord[c] - 0;
+            int two = newWord[c] - 0;
+            
+            if(one < two){
+                
+                return -1;
+                break;
+                
+            }else {
+                
+                /* ex: aa9  aa1 */
+                return 1;
+                break;
+            }
+            /* ex: aa1  aaa */
+        }else if(isdigit(treeWord[c]) && !isdigit(newWord[c])){
+            
+            return 1;
+            break;
+            
+            /* ex: aaa  aa1 */
+        }else if(!isdigit(treeWord[c]) && isdigit(newWord[c])){
+            
+            return -1;
+            break;
+            
+            /* ex: aab  aaa */
+        }else if(treeWord[c] > newWord[c]){
+            
+            return 1;
+            break;
+        }
+        
+        break;
+    }
+    
+    return -1;
 }
 
 /* this timer will be excuted by a thread. This will always update the running time and print it to the consol */

@@ -63,165 +63,231 @@ output:
 		<file name="te.st.txt">1</file>
 		<file name="wow.txt">1</file>
 		<file name="w.ow.txt">1</file>
+	<x/word>
 	<word text="all">
 		<file name="hello.txt">1</file>
+	<x/word>
 	<word text="appeared">
 		<file name="test">1</file>
+	<x/word>
 	<word text="ar3">
 		<file name="test.txt">1</file>
 		<file name="w.ow.txt">1</file>
+	<x/word>
+	<word text="bannanas">
+		<file name="testt.txt">1</file>
+	<x/word>
 	<word text="b">
 		<file name="appl.e.txt">1</file>
 		<file name="te.st.txt">1</file>
-	<word text="bannanas">
-		<file name="testt.txt">1</file>
+	<x/word>
 	<word text="c">
 		<file name="appl.e.txt">1</file>
 		<file name="te.st.txt">1</file>
+	<x/word>
 	<word text="d">
 		<file name="appl.e.txt">1</file>
 		<file name="te.st.txt">1</file>
+	<x/word>
 	<word text="does">
 		<file name="hello.txt">1</file>
+	<x/word>
 	<word text="dun">
 		<file name="test">2</file>
+	<x/word>
 	<word text="dunnnnn">
 		<file name="test">1</file>
+	<x/word>
 	<word text="e">
 		<file name="appl.e.txt">1</file>
 		<file name="te.st.txt">1</file>
+	<x/word>
 	<word text="ecan12312">
 		<file name="test">1</file>
+	<x/word>
 	<word text="f">
 		<file name="appl.e.txt">1</file>
 		<file name="te.st.txt">1</file>
+	<x/word>
 	<word text="file">
 		<file name="wow.txt">1</file>
+	<x/word>
 	<word text="files">
 		<file name="test">1</file>
+	<x/word>
 	<word text="folder">
 		<file name="wow.txt">1</file>
+	<x/word>
 	<word text="fun">
 		<file name="systems.txt">1</file>
+	<x/word>
 	<word text="g">
 		<file name="appl.e.txt">1</file>
 		<file name="te.st.txt">1</file>
+	<x/word>
 	<word text="get">
 		<file name="hello.txt">1</file>
+	<x/word>
 	<word text="god">
 		<file name="tes.t">1</file>
+	<x/word>
 	<word text="going">
 		<file name="tes.t">1</file>
+	<x/word>
 	<word text="h">
 		<file name="appl.e.txt">1</file>
 		<file name="te.st.txt">1</file>
-	<word text="h0w">
-		<file name="test.txt">1</file>
-		<file name="w.ow.txt">1</file>
+	<x/word>
 	<word text="hell0">
 		<file name="test.txt">1</file>
 		<file name="w.ow.txt">1</file>
+	<x/word>
 	<word text="how">
 		<file name="test">1</file>
+	<x/word>
+	<word text="h0w">
+		<file name="test.txt">1</file>
+		<file name="w.ow.txt">1</file>
+	<x/word>
 	<word text="i">
 		<file name="appl.e.txt">1</file>
 		<file name="te.st.txt">1</file>
+	<x/word>
 	<word text="if">
 		<file name="hello.txt">1</file>
 		<file name="test">1</file>
+	<x/word>
 	<word text="in">
 		<file name="wow.txt">1</file>
+	<x/word>
 	<word text="information">
 		<file name="hello.txt">1</file>
+	<x/word>
 	<word text="is">
 		<file name="wow.txt">2</file>
 		<file name="recursive.txt">1</file>
 		<file name="systems.txt">1</file>
 		<file name="tes.t">1</file>
+	<x/word>
 	<word text="it">
 		<file name="hello.txt">1</file>
 		<file name="recursive.txt">1</file>
 		<file name="wow.txt">1</file>
+	<x/word>
 	<word text="j">
 		<file name="appl.e.txt">1</file>
 		<file name="te.st.txt">1</file>
+	<x/word>
 	<word text="k">
 		<file name="appl.e.txt">1</file>
 		<file name="te.st.txt">1</file>
+	<x/word>
+	<word text="lets">
+		<file name="hello.txt">1</file>
+	<x/word>
+	<word text="likes">
+		<file name="testt.txt">1</file>
+	<x/word>
 	<word text="l">
 		<file name="appl.e.txt">1</file>
 		<file name="te.st.txt">1</file>
-	<word text="lets">
-		<file name="hello.txt">1</file>
-	<word text="likes">
-		<file name="testt.txt">1</file>
+	<x/word>
 	<word text="lives">
 		<file name="wow.txt">1</file>
+	<x/word>
+	<word text="many">
+		<file name="test">1</file>
+	<x/word>
+	<word text="me">
+		<file name="test">1</file>
+	<x/word>
+	<word text="monkey">
+		<file name="testt.txt">1</file>
+	<x/word>
 	<word text="m">
 		<file name="appl.e.txt">1</file>
 		<file name="te.st.txt">1</file>
-	<word text="many">
-		<file name="test">1</file>
-	<word text="me">
-		<file name="test">1</file>
-	<word text="monkey">
-		<file name="testt.txt">1</file>
+	<x/word>
 	<word text="my">
 		<file name="tes.t">1</file>
+	<x/word>
 	<word text="n">
 		<file name="appl.e.txt">1</file>
 		<file name="te.st.txt">1</file>
+	<x/word>
 	<word text="named">
 		<file name="test">1</file>
 		<file name="wow.txt">2</file>
+	<x/word>
 	<word text="o">
 		<file name="appl.e.txt">1</file>
 		<file name="te.st.txt">1</file>
+	<x/word>
 	<word text="or">
 		<file name="recursive.txt">1</file>
+	<x/word>
 	<word text="p">
 		<file name="appl.e.txt">1</file>
 		<file name="te.st.txt">1</file>
+	<x/word>
 	<word text="program">
 		<file name="hello.txt">1</file>
 		<file name="test">1</file>
+	<x/word>
 	<word text="programming">
 		<file name="systems.txt">1</file>
+	<x/word>
 	<word text="recursive">
 		<file name="recursive.txt">1</file>
+	<x/word>
 	<word text="see">
 		<file name="hello.txt">1</file>
+	<x/word>
 	<word text="systems">
 		<file name="systems.txt">1</file>
+	<x/word>
 	<word text="test">
 		<file name="test">2</file>
+	<x/word>
 	<word text="testfolder2">
 		<file name="wow.txt">1</file>
+	<x/word>
 	<word text="the">
 		<file name="hello.txt">1</file>
+	<x/word>
 	<word text="this">
 		<file name="hello.txt">1</file>
 		<file name="wow.txt">1</file>
 		<file name="tes.t">1</file>
+	<x/word>
 	<word text="to">
 		<file name="tes.t">1</file>
+	<x/word>
 	<word text="txt">
 		<file name="wow.txt">1</file>
+	<x/word>
 	<word text="well">
 		<file name="hello.txt">1</file>
+	<x/word>
 	<word text="wild">
 		<file name="test">1</file>
+	<x/word>
 	<word text="work">
 		<file name="tes.t">1</file>
+	<x/word>
 	<word text="works">
 		<file name="hello.txt">1</file>
+	<x/word>
 	<word text="wow">
 		<file name="wow.txt">2</file>
 		<file name="hello.txt">1</file>
 		<file name="tes.t">1</file>
+	<x/word>
+	<word text="you">
+		<file name="test">1</file>
+	<x/word>
 	<word text="y0u">
 		<file name="test.txt">1</file>
 		<file name="w.ow.txt">1</file>
-	<word text="you">
-		<file name="test">1</file>
+	<x/word>
 <fileIndex>

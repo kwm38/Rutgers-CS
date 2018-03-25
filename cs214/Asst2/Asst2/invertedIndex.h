@@ -90,4 +90,8 @@ int ValidDigit(char* x);
  * timer will be executed by a thead in order to keep track of and display the running time during the entirety of the program.
  */
 void * timer ();
+/*
+ * sortedInsert makes sure we insert the words properly into our bst
+ */
+int sortedInsert(char* treeWord, char* newWord);
 #endif
