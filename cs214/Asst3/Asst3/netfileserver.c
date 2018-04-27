@@ -217,7 +217,6 @@ void openMessage(char * buffer, int socket){
             pthread_mutex_unlock(&dataLock); /*unlock the data*/
             
         }else{
-            printf("error %s\n", strerror(errno));
             /* we were un-able to open the file so store the errno in a return message */
             snprintf(returnMessage, 15, "%d", -(errno));
         }
@@ -569,7 +568,6 @@ void * cleanerThread(){
             }
             pthread_mutex_unlock(&queueLock); /*unlock the data*/
         }
-        printf("\n");
         sleep(3);
     }
     return NULL;
