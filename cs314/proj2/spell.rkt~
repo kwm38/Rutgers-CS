@@ -1,0 +1,150 @@
+; *********************************************
+; *  314 Principles of Programming Languages  *
+; *  Spring 2018                              *
+; *  Student Version                          *
+; *********************************************
+#lang racket
+;; contains "ctv", "A", and "reduce" definitions
+(require "include.rkt")
+
+;; contains dictionary definition
+;;(require "test-dictionary.rkt")
+(require "dictionary.rkt")
+
+;; -----------------------------------------------------
+;; HELPER FUNCTIONS
+
+(define begin;;start by hashing the dictonary items and the word 
+  (lambda (hashfunctionlist dic word);;onced hashed we will test to see if the reduced dictonary / word vector matches our reduceed word / word vector
+    (test (hashDictionary hashfunctionlist dic)(hashWords hashfunctionlist word)
+          (reduce + (bitVector (hashWords hashfunctionlist word) (hashWords hashfunctionlist word)) 0) dic word)
+    ))
+    
+(define hashDictionary;;hash all the words in the dictionary 
+  (lambda (hashfunctionlist dic)
+    (if
+     (not (null? dic))
+           (if
+            (not (null? hashfunctionlist));; hash the first word, and then hash the rest
+                  (cons (hashWords hashfunctionlist (car dic)) (hashDictionary hashfunctionlist (cdr dic)))
+                  '())
+           '())
+    ))
+
+(define hashWords;;hash a single word
+  (lambda (hashfunctionlist w)
+    (if
+     (not (null? hashfunctionlist));;each word will get multiple hashed values (1 per hashfunction)
+           (cons ((car hashfunctionlist) w) (hashWords (cdr hashfunctionlist) w))
+           '());;(cons (+ (ctv(car w)) (ctv(car(cdr w))))'()));; each bit vector will also have a special hashed value to prevent false positives
+    ))
+
+(define test
+  (lambda (hashedDic hashedWord reducedWordVector dic word)
+    (cond
+     ((null? hashedDic) #f);;if we checked the entire dictionary and didnt find the word. return false 
+     ((and (= (reduce + (bitVector (car hashedDic) hashedWord) 0) reducedWordVector)
+           ;;(=(list-counter? (car dic))(list-counter? word))
+           ;;(= (ctv (car (car dic)))(ctv (car word)))
+           #t));; if the bitvector of the comparison is the correct bit vector return #t
+     (else
+      (test (cdr hashedDic) hashedWord reducedWordVector (cdr dic)  word)))
+    ))
+
+(define bitVector;;build a bit vector 
+  (lambda (hashedCompare hashedWord)
+    (cond
+     ((null? hashedCompare) '());;if there are no more hashed values return 0
+     ((= (car hashedCompare) (car hashedWord));;if the first hashed valued of compareWord matches the first hashed value hashedWord 
+      (cons 1 (bitVector (cdr hashedCompare) (cdr hashedWord))));;then add 1 to vector
+     (else
+      (cons 0 (bitVector (cdr hashedCompare) (cdr hashedWord)))));;else add 0 to vector 
+    )) 
+
+(define (reverse w);; this function will reverse a word
+  (if (null? w)
+      w
+      (append (reverse (cdr w)) (list (car w)))))
+
+;; -----------------------------------------------------
+;; KEY FUNCTION
+
+(define key
+  (lambda (w)
+     (if
+      (null? w) 0
+      (+ (* 31( key( cdr w)))(ctv (car w))))
+))
+
+;; -----------------------------------------------------
+;; HASH FUNCTION GENERATORS
+
+;; value of parameter "size" should be a prime number
+(define gen-hash-division-method
+  (lambda (size) ;; range of values: 0..size-1
+     (lambda (w)
+       (modulo (key (reverse w)) size)
+)))
+
+;; value of parameter "size" is not critical
+;; Note: hash functions may return integer values in "real"
+;;       format, e.g., 17.0 for 17
+
+(define gen-hash-multiplication-method
+  (lambda (size) ;; range of values: 0..size-1
+    (lambda (w)
+      (floor (* size (- (* (key (reverse w)) A) (floor (* (key (reverse w)) A))))))
+))
+
+;; -----------------------------------------------------
+;; EXAMPLE HASH FUNCTIONS AND HASH FUNCTION LISTS
+
+(define hash-1 (gen-hash-division-method 701))
+(define hash-2 (gen-hash-division-method 899))
+(define hash-3 (gen-hash-multiplication-method 700))
+(define hash-4 (gen-hash-multiplication-method 900))
+
+(define hashfl-1 (list hash-1 hash-2 hash-3 hash-4))
+(define hashfl-2 (list hash-1 hash-3))
+
+;; -----------------------------------------------------
+;; EXAMPLE HASH VALUES
+;;   to test your hash function implementation
+;;
+;;  (hash-1 '(h e l l o)) ==> 674
+;;  (hash-1 '(d a y))     ==> 395
+;;  (hash-1 '(c l a s s)) ==> 360
+;;
+;;  (hash-2 '(h e l l o)) ==> 139
+;;  (hash-2 '(d a y))     ==> 304
+;;  (hash-2 '(c l a s s)) ==> 205
+;;
+;;  (hash-3 '(h e l l o)) ==> 552.0
+;;  (hash-3 '(d a y))     ==> 501.0
+;;  (hash-3 '(c l a s s)) ==> 247.0
+;;
+;;  (hash-4 '(h e l l o)) ==> 710.0
+;;  (hash-4 '(d a y))     ==> 644.0
+;;  (hash-4 '(c l a s s)) ==> 317.0
+
+
+;; -----------------------------------------------------
+;; SPELL CHECKER GENERATOR
+
+(define gen-checker
+  (lambda (hashfunctionlist dict)
+    (lambda (word)
+      (begin hashfunctionlist dict word))
+    ))
+
+;; -----------------------------------------------------
+;; EXAMPLE SPELL CHECKERS
+
+(define checker-1 (gen-checker hashfl-1 dictionary))
+(define checker-2 (gen-checker hashfl-2 dictionary))
+
+;; EXAMPLE APPLICATIONS OF A SPELL CHECKER
+;;
+;;  (checker-1 '(a r g g g)) ==> #f
+;;  (checker-2 '(h e l l o)) ==> #t
+

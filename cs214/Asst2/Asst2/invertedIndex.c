@@ -10,6 +10,7 @@ int main(int argc, char** argv){
     
     /* must have 3 arguements -- program writepath readpath -- */
     if(argc != 3){
+        
         printf("An invalid number of  arguements, we need two arguements total (not including the program)\n");
         exit(0);
         

@@ -10,4 +10,4 @@ memgrind: mymalloc.c memgrind.c
 	$(CC) $(CFLAGS) -c mymalloc.c
 	$(CC) $(CFLAGS) -o memgrind memgrind.c mymalloc.o
 clean:
-	rm -f mymalloc.o memgrind
+	rm -f mymalloc.o memgrinda
