@@ -1,0 +1,121 @@
+--------------------- test plan ---------------------
+
+Christopher LoPresti 
+Roslan Arslanouk 
+CS214
+Assst 3
+
+--------------------- basics ---------------------
+
+1. compile your code with our libnetfiles.c code 
+
+2. make sure you use make to compile our code 
+
+3. on an ilab machine type ./netfileserver to run the server
+
+4. on another ilab machine run your client code 
+
+5. make sure you use netserverinit("host-name", "file mode");
+
+6. make your net system calls. 
+
+--------------------- basics ---------------------
+
+--------------------- sample code with results: ---------------------
+
+-- sample code --
+
+	netserverinit("assembly.cs.rutgers.edu", 1);
+    printf("%s\n\n", strerror(errno));
+
+    printf("-------------\n");
+    printf("%s\n", "open client.c");
+    int good = netopen("client.c", O_RDWR);
+    printf("%d\n", good);
+    printf("%s\n\n", strerror(errno));
+    printf("-------------\n");
+
+    printf("%s\n", "open client.c");
+    int  fd = netopen("client.c", O_RDWR);
+    printf("%d\n", fd);
+    printf("%s\n\n", strerror(errno));
+    printf("-------------\n");
+
+
+    printf("%s\n", "open test.txt");
+    int readfd = netopen("test.txt", O_RDWR);
+    printf("%d\n", readfd);
+    printf("%s\n", strerror(errno));
+    printf("-------------\n");
+
+
+    printf("%s\n", "close client.c");
+    int close = netclose(good);
+    printf("%d\n", close);
+    printf("%s\n", strerror(errno));
+    printf("-------------\n");
+    char * buf = malloc(36);
+
+    printf("%s\n", "read text.txt");
+    int read = netread(readfd,buf, (35));
+    printf("read: %d\n", read);
+    printf("%s\n", buf);
+    printf("%s\n", strerror(errno));
+    printf("-------------\n");
+
+    printf("%s\n", "write text.txt");
+    int write = netwrite(readfd,"This is sample code", (35));
+    printf("write: %d\n", write);
+    printf("%s\n", strerror(errno));
+    printf("-------------\n");
+
+    -- sample code --
+
+
+-- results --
+
+Success
+
+-------------
+open client.c
+-6
+Success
+
+-------------
+open client.c
+-1
+Connection timed out
+
+-------------
+open test.txt
+-7
+Success
+-------------
+close client.c
+0
+Success
+-------------
+read text.txt
+read: 35
+so far, this is whats in the file.
+
+Success
+-------------
+write text.txt
+write: 19
+Success
+-------------
+
+-- results --
+
+
+-- results of the write  --
+
+in test.txt:
+
+so far, this is whats in the file.
+This is sample code
+
+-- results of the write  --
+
+--------------------- sample code with results: ---------------------
